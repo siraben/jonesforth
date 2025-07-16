@@ -4,7 +4,7 @@
 \	This is PUBLIC DOMAIN (see public domain release statement below).
 \	$Id: jonesforth.f,v 1.18 2009-09-11 08:32:33 rich Exp $
 \
-\	The first part of this tutorial is in jonesforth.S.  Get if from http://annexia.org/forth
+\	The first part of this tutorial is in jonesforth.S.  Get it from http://annexia.org/forth
 \
 \	PUBLIC DOMAIN ----------------------------------------------------------------------
 \
@@ -82,7 +82,7 @@
 	[		\ go into immediate mode (temporarily)
 	CHAR :		\ push the number 58 (ASCII code of colon) on the parameter stack
 	]		\ go back to compile mode
-	LITERAL		\ compile LIT 58 as the definition of ':' word
+	LITERAL		\ compile LIT 58 for the definition of the ':' word
 ;
 
 \ A few more character constants defined the same way as above.
@@ -130,7 +130,7 @@
 \	where OFFSET is the offset of 'rest'
 \ condition IF true-part ELSE false-part THEN
 \ 	-- compiles to: --> condition 0BRANCH OFFSET true-part BRANCH OFFSET2 false-part rest
-\	where OFFSET if the offset of false-part and OFFSET2 is the offset of rest
+\	where OFFSET is the offset of false-part and OFFSET2 is the offset of rest
 
 \ IF is an IMMEDIATE word which compiles 0BRANCH followed by a dummy offset, and places
 \ the address of the 0BRANCH on the stack.  Later when we see THEN, we pop that address
@@ -218,7 +218,7 @@
 \ FORTH allows ( ... ) as comments within function definitions.  This works by having an IMMEDIATE
 \ word called ( which just drops input characters until it hits the corresponding ).
 : ( IMMEDIATE
-	1		\ allowed nested parens by keeping track of depth
+	1		\ allows nested parens by keeping track of depth
 	BEGIN
 		KEY		\ read next character
 		DUP '(' = IF	\ open paren?
@@ -288,7 +288,7 @@
 	will print out these characters:
 		<space> <space> - 1 2 3
 
-	In other words, the number padded left to a certain number of characters.
+	In other words, the number padded on the left to a certain number of characters.
 
 	The full number is printed even if it is wider than width, and this is what allows us to
 	define the ordinary functions U. and . (we just set width to zero knowing that the full
@@ -1393,7 +1393,7 @@
 	To make it more like a C string, at runtime Z" just leaves the address of the string
 	on the stack (not address & length as with S").  To implement this we need to add the
 	extra NUL to the string and also a DROP instruction afterwards.  Apart from that the
-	implementation just a modified S".
+	implementation is just a modified S".
 )
 : Z" IMMEDIATE
 	STATE @ IF	( compiling? )
@@ -1520,7 +1520,7 @@
 (
 	UNUSED returns the number of cells remaining in the user memory (data segment).
 
-	For our implementation we will use Linux brk(2) system call to find out the end
+	For our implementation we will use the Linux brk(2) system call to find out the end
 	of the data segment and subtract HERE from it.
 )
 : GET-BRK	( -- brkpoint )
