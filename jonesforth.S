@@ -34,7 +34,7 @@
 	a little bit of assembly to talk to the hardware and implement a few primitives, all the
 	rest of the language and compiler is written in FORTH itself.  Remember I said before
 	that FORTH lacked IF-statements and loops?  Well of course it doesn't really because
-	such a lanuage would be useless, but my point was rather that IF-statements and loops are
+	such a language would be useless, but my point was rather that IF-statements and loops are
 	written in FORTH itself.
 
 	Now of course this is common in other languages as well, and in those languages we call
@@ -2269,7 +2269,7 @@ set_up_data_segment:
 	xor %ebx,%ebx		// Call brk(0)
 	movl $__NR_brk,%eax
 	int $0x80
-	movl %eax,var_HERE	// Initialise HERE to point at beginning of data segment.
+	movl %eax,var_HERE	// Initialise HERE to point at the beginning of data segment.
 	addl $INITIAL_DATA_SEGMENT_SIZE,%eax	// Reserve nn bytes of memory for initial data segment.
 	movl %eax,%ebx		// Call brk(HERE+INITIAL_DATA_SEGMENT_SIZE)
 	movl $__NR_brk,%eax
@@ -2277,7 +2277,7 @@ set_up_data_segment:
 	ret
 
 /*
-	We allocate static buffers for the return static and input buffer (used when
+	We allocate static buffers for the return stack and input buffer (used when
 	reading in files and text that the user types in).
 */
 	.set RETURN_STACK_SIZE,8192
